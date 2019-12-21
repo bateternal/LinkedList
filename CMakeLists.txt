@@ -10,6 +10,7 @@ add_executable(LinkedList ${SOURCES})
 add_executable(run_test tests/test.cpp)
 add_test(runtest run_test)
 
-enable_testing()
+#enable_testing()
+include( CTest )
 
 target_link_libraries(run_test ${GTEST_LIBRARIES} pthread)
