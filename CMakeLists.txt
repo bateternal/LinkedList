@@ -7,10 +7,9 @@ include_directories(include)
 set(SOURCES main.cpp)
 
 add_executable(LinkedList ${SOURCES})
-add_executable(run_test tests/test.cpp)
-add_test(runtest run_test)
+include( CTest )
+add_subdirectory(tests)
+
 
 #enable_testing()
 include( CTest )
-
-target_link_libraries(run_test ${GTEST_LIBRARIES} pthread)
