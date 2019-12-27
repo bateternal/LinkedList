@@ -4,23 +4,21 @@
 
 using namespace std;
 
-TEST(LinkedListTest, Add) { 
-	LinkedList* ll = new LinkedList();
-	ll->add("abolfazl",21);
-	ASSERT_EQ(ll->printNodes(),"abolfazl-21+");
-	ll->add("hamed",20);
-	ASSERT_EQ(ll->printNodes(),"abolfazl-21+hamed-20+");
-}
-
-TEST(LinkedListTest, Get) { 
+TEST(LinkedListTest, single_item) { 
 	LinkedList* ll = new LinkedList();
 	ll->add("abolfazl",21);
 	ASSERT_EQ(ll->get("abolfazl"),21);
-	ll->add("hamed",20);
-	ASSERT_EQ(ll->get("abolfazl"),21);
-	ASSERT_EQ(ll->get("hamed"),20);
 }
 
+TEST(LinkedListTest, item_list) {
+	LinkedList* ll = new LinkedList();
+	ll->add("abolfazl",21);
+	ASSERT_EQ(ll->slice(0,-1),"abolfazl-21+");
+	ll->add("hamed",20);
+	ASSERT_EQ(ll->slice(0,-1),"abolfazl-21+hamed-20+");
+	ll->add("hosein",19);
+	ASSERT_EQ(ll->slice(0,-1),"abolfazl-21+hamed-20+hosein-19+");
+}
  
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

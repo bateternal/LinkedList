@@ -9,9 +9,12 @@ public:
 	Node* head;
 	LinkedList(){ head = NULL;}
 	void add(string key,int value);
-	string printNodes();
+	string slice(int start,int end);
 	int get(string key);
+	void del(string key);
 };
+
+
 
 
 void LinkedList::add(string key,int value) {
@@ -51,12 +54,43 @@ int LinkedList::get(string key) {
 	return 0;
 }
 
-string LinkedList::printNodes() {
-	Node* target = this->head;
-	string output = "";
-	while(target != NULL) {
-		output = output + target->key + "-" + to_string(target->value) + "+";
+void LinkedList::del(string key){
+	if (head == NULL) {
+		cout<<key<<" has not found"<<endl;
+		return;
+	}
+	Node* target = head;
+	if (target->key == key) {
+		head = target->next;
+		return;
+	}
+	Node* previous = target;
+	target = target->next;
+	
+	while (target != NULL) {
+		if (target->key == key) {
+			previous->next = target->next;
+			return;
+		}
+		previous = target;
 		target = target->next;
+	}
+	cout<<key<<" has not found"<<endl;
+}
+
+string LinkedList::slice(int start,int end) {
+	string output = "";
+	int index = 0;
+	Node* target = head;
+	while(target != NULL) {
+		if (index >= start) {		
+			output = output + target->key + "-" + to_string(target->value) + "+";
+		}
+		if (index == end) {
+			return output;
+		}
+		target = target->next;
+		index++;
 	}
 	return output;
 }
